@@ -19,8 +19,13 @@ pygame.mixer.pre_init()
 pygame.init()
 pygame.display.set_caption("Classic Snake Game")
 default_font = pygame.font.Font(pygame.font.get_default_font(), 36)
+default_small_font = pygame.font.Font(pygame.font.get_default_font(), 20)
 start_message = default_font.render(
     "Press Space to Start", True, pygame.Color('white'))
+credits_message_1 = default_small_font.render(
+    "All game assets taken from ", True, pygame.Color('white'))
+credits_message_2 = default_small_font.render(
+    "https://github.com/clear-code-projects/Snake", True, pygame.Color('white'))
 snake_y_pos = (cell_number - 1) / 2
 static_snake = snake.Snake(_body=[Vector2(cell_number - 3, snake_y_pos), Vector2(cell_number - 2, snake_y_pos), Vector2(cell_number - 1, snake_y_pos)],
                            _direction=Vector2(-1, 0))
@@ -60,6 +65,11 @@ def main_menu():
         screen.blit(apple, apple_rect)
         screen.blit(start_message, start_message.get_rect(
             midtop=(apple_rect.centerx, apple_rect.centery + 36)))
+        start_rect = start_message.get_rect(midtop=screen.get_rect().center)
+        screen.blit(credits_message_1, credits_message_1.get_rect(
+            midtop=(start_rect.centerx, start_rect.centery + 36 * 2)))
+        screen.blit(credits_message_2, credits_message_2.get_rect(
+            midtop=(start_rect.centerx, start_rect.centery + 36 * 3)))
         static_snake.draw_snake()
         pygame.display.update()
 
